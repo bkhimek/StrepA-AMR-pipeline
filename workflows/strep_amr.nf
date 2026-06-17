@@ -4,7 +4,6 @@ include { AMRFINDER } from '../modules/amrfinder'
 include { MLST      } from '../modules/mlst'
 include { EMMTYPER  } from '../modules/emmtyper'
 include { SUMMARY   } from '../modules/summary'
-include { MULTIQC   } from '../modules/multiqc'
 
 workflow STREP_AMR {
 
@@ -22,18 +21,9 @@ workflow STREP_AMR {
 
     SUMMARY ( ch_amr_tsvs, ch_mlst_tsvs, ch_emm_tsvs )
 
-    ch_multiqc_input = Channel.empty()
-        .mix( AMRFINDER.out.tsv_only )
-        .mix( MLST.out.tsv_only )
-        .mix( EMMTYPER.out.tsv_only )
-        .collect()
-
-    MULTIQC ( ch_multiqc_input )
-
     emit:
     amrfinder_results = AMRFINDER.out.results
     mlst_results      = MLST.out.results
     emmtyper_results  = EMMTYPER.out.results
     summary           = SUMMARY.out.summary
-    multiqc_report    = MULTIQC.out.report
 }
