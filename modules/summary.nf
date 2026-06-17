@@ -22,8 +22,8 @@ process SUMMARY {
         with open(path) as fh:
             reader = csv.DictReader(fh, delimiter='\t')
             for row in reader:
-                if row.get('Element type', '') in ('AMR', 'STRESS', 'VIRULENCE'):
-                    genes.append(row.get('Gene symbol', '').strip())
+                if row.get('Type', '') in ('AMR', 'STRESS', 'VIRULENCE', 'POINT'):
+                    genes.append(row.get('Element symbol', '').strip())
         return ';'.join(sorted(set(genes))) if genes else 'none'
 
     def parse_mlst(path):
