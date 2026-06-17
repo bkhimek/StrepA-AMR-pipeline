@@ -1,0 +1,16 @@
+work/
+.nextflow/
+.nextflow.log*
+.nextflow.pid
+results/
+test_results/
+*.sif
+singularity_cache/
+.conda/
+*.log
+*.txt.gz
+pipeline_info/
+.DS_Store
+.vscode/
+.idea/
+*.swp
